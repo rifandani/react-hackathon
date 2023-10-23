@@ -1,25 +1,48 @@
 import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
-import { Anchor, Text } from '@mantine/core';
+import { Button, Container, Group, Text, Title } from '@mantine/core';
+import SvgIcon from '@shared/components/atoms/SvgIcon/SvgIcon.atom';
 import { Link } from 'react-router-dom';
+import classes from './NotFound.module.css';
 import useNotFoundPageVM from './NotFound.vm';
 
 export default function NotFoundPage() {
   const { userStore, LL } = useNotFoundPageVM();
 
   return (
-    <main className="bg-base-100 flex h-screen flex-col items-center justify-center space-y-3">
-      <Text className="text-3xl font-bold italic" variant="gradient">
-        {LL.auth.notFound404()}
-      </Text>
-      <p className="mb-5">{LL.auth.gone()}</p>
+    <Container className={classes.root}>
+      <div className={classes.inner}>
+        <SvgIcon
+          id="403"
+          width="75vw"
+          height="40vh"
+          className={classes.image}
+        />
 
-      <Anchor
-        component={Link}
-        to={userStore.user ? homePath.root : authPath.login}
-      >
-        {LL.auth.backTo({ isLoggedIn: userStore.user ? 'true' : 'false' })}
-      </Anchor>
-    </main>
+        <div className={classes.content}>
+          <Title className={classes.title}>{LL.auth.notFound404()}</Title>
+          <Text
+            c="dimmed"
+            size="lg"
+            ta="center"
+            className={classes.description}
+          >
+            {LL.auth.gone()}
+          </Text>
+
+          <Group justify="center">
+            <Button
+              size="md"
+              component={Link}
+              to={userStore.user ? homePath.root : authPath.login}
+            >
+              {LL.auth.backTo({
+                isLoggedIn: userStore.user ? 'true' : 'false',
+              })}
+            </Button>
+          </Group>
+        </div>
+      </div>
+    </Container>
   );
 }

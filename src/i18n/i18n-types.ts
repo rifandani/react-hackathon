@@ -33,7 +33,7 @@ type RootTranslation = {
 		 */
 		notFound404: string
 		/**
-		 * I​t​'​s​ ​g​o​n​e
+		 * P​a​g​e​ ​y​o​u​ ​a​r​e​ ​t​r​y​i​n​g​ ​t​o​ ​o​p​e​n​ ​d​o​e​s​ ​n​o​t​ ​e​x​i​s​t​.​ ​Y​o​u​ ​m​a​y​ ​h​a​v​e​ ​m​i​s​t​y​p​e​d​ ​t​h​e​ ​a​d​d​r​e​s​s​,​ ​o​r​ ​t​h​e​ ​p​a​g​e​ ​h​a​s​ ​b​e​e​n​ ​m​o​v​e​d​ ​t​o​ ​a​n​o​t​h​e​r​ ​U​R​L​.
 		 */
 		gone: string
 		/**
@@ -293,7 +293,7 @@ export type TranslationFunctions = {
 		 */
 		notFound404: () => LocalizedString
 		/**
-		 * It's gone
+		 * Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL.
 		 */
 		gone: () => LocalizedString
 		/**

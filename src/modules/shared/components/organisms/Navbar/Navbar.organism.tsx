@@ -34,7 +34,7 @@ export default function Navbar() {
       <header className={classes.header}>
         <Group h="100%" justify="space-between">
           <Group h="100%" gap="md">
-            <SvgIcon id="icon-reactjs" className="h-6 w-6" />
+            <SvgIcon id="reactjs" className="h-6 w-6" />
             <Text>{LL.common.appName()}</Text>
           </Group>
 
@@ -165,7 +165,7 @@ export default function Navbar() {
         <Drawer.Content>
           <Drawer.Header>
             <Group>
-              <SvgIcon id="icon-reactjs" className="h-6 w-6" />
+              <SvgIcon id="reactjs" className="h-6 w-6" />
               <Drawer.Title>{LL.common.appName()}</Drawer.Title>
             </Group>
 

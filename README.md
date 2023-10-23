@@ -30,8 +30,8 @@ Rename `.env.production.example` to `.env.production`.
 # install deps
 $ pnpm install
 
-# Runs the app + PWA
-$ pnpm dev
+# Runs the app + PWA + sync with i18n changes
+$ pnpm on:dev
 ```
 
 ## Testing

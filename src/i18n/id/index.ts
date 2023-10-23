@@ -6,7 +6,7 @@ const id = {
     logoutUsername: 'Keluar ({username})',
     registerHere: 'Tidak punya akun? <>Daftar disini<>',
     notFound404: '404: Tidak Ditemukan',
-    gone: 'Halaman Kosong',
+    gone: 'Halaman yang Anda coba buka tidak ada. Anda mungkin salah mengetik alamat, atau halaman telah dipindahkan ke URL lain.',
     backTo: 'Kembali ke {isLoggedIn|{true: beranda, false: login}}',
   },
   home: {

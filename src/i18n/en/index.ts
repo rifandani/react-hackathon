@@ -6,7 +6,7 @@ const en = {
     logoutUsername: 'Logout ({username:string})',
     registerHere: "Don't have an account? <>Register here<>",
     notFound404: '404: Not Found',
-    gone: "It's gone",
+    gone: 'Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL.',
     backTo: 'Go back to {isLoggedIn|{true: home, false: login}}',
   },
   home: {
