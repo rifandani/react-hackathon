@@ -3,7 +3,7 @@ import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
 import { useI18nContext } from '@i18n/i18n-react';
 import { showNotification } from '@mantine/notifications';
-import { useMount } from 'ahooks';
+import { useMount } from '@shared/hooks/useMount/useMount.hook';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 /**

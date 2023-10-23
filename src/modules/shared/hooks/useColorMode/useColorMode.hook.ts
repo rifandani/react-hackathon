@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useLocalStorageState } from 'ahooks';
+import { useLocalStorage } from '@mantine/hooks';
 import { useCallback, useEffect, useMemo } from 'react';
 import { useMediaQuery } from '../useMediaQuery/useMediaQuery.hook';
 
@@ -76,7 +76,8 @@ export function useColorMode<T extends string = BasicColorMode>(
     disableTransition = true,
   } = options;
 
-  const store = useLocalStorageState(storageKey, {
+  const store = useLocalStorage({
+    key: storageKey,
     defaultValue: initialValue,
   });
   const preferredDark = useMediaQuery(COLOR_SCHEME_QUERY);

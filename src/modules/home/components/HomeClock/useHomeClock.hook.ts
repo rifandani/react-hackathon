@@ -3,8 +3,8 @@ import { useI18nContext } from '@i18n/i18n-react';
 import { loadLocale } from '@i18n/i18n-util.sync';
 import { shuffle } from '@rifandani/nxact-yutiriti';
 import { useLocalesStorage } from '@shared/hooks/useLocalesStorage/useLocalesStorage.hook';
+import { useRafInterval } from '@shared/hooks/useRafInterval/useRafInterval.hook';
 import { todosPath } from '@todo/routes/todos.route';
-import { useRafInterval } from 'ahooks';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 

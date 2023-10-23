@@ -1,5 +1,5 @@
 import { NotificationsProps } from '@mantine/notifications';
-import { useResetState } from 'ahooks';
+import { useResetState } from '@shared/hooks/useResetState/useResetState.hook';
 import { createContext } from 'react';
 
 export type ToastContextInterface = ReturnType<typeof createToastContext>;

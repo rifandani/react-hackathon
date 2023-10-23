@@ -15,7 +15,7 @@ React app built with:
 - `@mantine/core` + `@mantine/notifications` + `@mantine/dates` -> adaptive, accessible and robust styled UI components
 - `typesafe-i18n` -> i18n, supports for "en" & "id" locales
 - `type-fest` -> collection of useful type helpers
-- `@mantine/hooks` + `ahooks` -> collection of useful react custom hooks
+- `@mantine/hooks` -> collection of useful react custom hooks
 - `@rifandani/nxact-yutiriti` -> collection of useful utils
 - `dayjs` -> collection of useful date utils (required if when we use `@mantine/dates`)
 - `vite-plugin-pwa` + `@vite-pwa/assets-generator` + `@rollup/plugin-replace` + `https-localhost` + `workbox-core` + `workbox-precaching` + `workbox-routing` + `workbox-window` -> Progressive Web App (PWA)
