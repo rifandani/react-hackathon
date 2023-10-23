@@ -23,6 +23,9 @@ dependencies:
   '@mantine/notifications':
     specifier: ^7.1.5
     version: 7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0)
+  '@mantine/spotlight':
+    specifier: ^7.1.5
+    version: 7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0)
   '@rifandani/nxact-yutiriti':
     specifier: ^1.2.2
     version: 1.2.2
@@ -2465,6 +2468,21 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       react-transition-group: 4.4.5(react-dom@18.2.0)(react@18.2.0)
+    dev: false
+
+  /@mantine/spotlight@7.1.5(@mantine/core@7.1.5)(@mantine/hooks@7.1.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-cdzcRxOfCzH0AVIdVu+OFxhU8wX1h3VClb0MOEk1fkSL6sSml6BMVrl3CarW6pJ0DR/TnjjxNnVWjIsY0JTwNQ==}
+    peerDependencies:
+      '@mantine/core': 7.1.5
+      '@mantine/hooks': 7.1.5
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@mantine/core': 7.1.5(@mantine/hooks@7.1.5)(@types/react@18.2.29)(react-dom@18.2.0)(react@18.2.0)
+      '@mantine/hooks': 7.1.5(react@18.2.0)
+      '@mantine/store': 7.1.5(react@18.2.0)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@mantine/store@7.1.5(react@18.2.0):
