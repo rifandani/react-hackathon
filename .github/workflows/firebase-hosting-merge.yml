@@ -20,7 +20,7 @@ jobs:
         run: pnpm install
       - name: Build app
         run: pnpm build
-      - name: Deploy builds to Firebase Hosting
+      - name: Deploy production builds to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
