@@ -137,7 +137,7 @@ export default function Navbar() {
               >
                 <Menu.Target>
                   <Avatar className="cursor-pointer">
-                    {(data.displayName ?? 'Unknown').slice(0, 2)}
+                    {(data.displayName ?? data.email ?? 'Unknown').slice(0, 2)}
                   </Avatar>
                 </Menu.Target>
 

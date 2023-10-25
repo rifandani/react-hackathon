@@ -23,6 +23,16 @@ export default function TodosItem({ todo }: Props) {
 
   // #region HANDLERS
   const onUpdateTodo = (_todo: TodoSchema) => async () => {
+    // only allow user who belongs the todo
+    if (_todo.userId !== user.data?.uid) {
+      showNotification({
+        color: 'red',
+        title: 'Mutation Failed',
+        message: "You are not authorized to update other's todo",
+      });
+      return;
+    }
+
     // reference to the todo document in todos collection
     const todoDoc = getTodoDocument(firestore, _todo.id);
 
