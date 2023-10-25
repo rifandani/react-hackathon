@@ -7,7 +7,9 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
 
 /**
- * Hooks to authenticate your firebase user, wheter they're logged in or not
+ * Hooks to authenticate your firebase user, whether they're logged in or not
+ *
+ * @description currently it is not possible to get user auth in RRD loader, because user data initially null
  *
  * @example
  *
@@ -51,6 +53,8 @@ export default function useCheckAuthFirebase() {
         color: 'blue',
       });
     }
+
+    // don't listen to eslint
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname, status, user]);
 }
