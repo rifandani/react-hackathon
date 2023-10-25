@@ -10,9 +10,16 @@ jobs:
     if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - run: pnpm ci && pnpm build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
+      - name: Checkout branch
+        uses: actions/checkout@v3
+      - name: Setup PNPM
+        uses: pnpm/action-setup@v2
+      - name: Install deps
+        run: pnpm install
+      - name: Build app
+        run: pnpm build
+      - name: Deploy builds to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_APP_TEMPLATE_RIFANDANI }}'
