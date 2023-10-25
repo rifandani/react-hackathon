@@ -22,7 +22,7 @@ export const useTodoUpdate = () => {
   return useMutation<
     UpdateTodoApiResponseSchema,
     ErrorApiResponseSchema,
-    UpdateTodoSchema,
+    UpdateTodoSchema & { id: string },
     { previousTodosQueryResponse: TodoListApiResponseSchema }
   >({
     // Called before `mutationFn`:

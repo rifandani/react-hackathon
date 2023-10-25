@@ -51,7 +51,7 @@ export const todoApi = {
 
     return createTodoApiResponseSchema.parse(resp.data);
   },
-  update: async ({ id, ...body }: UpdateTodoSchema) => {
+  update: async ({ id, ...body }: UpdateTodoSchema & { id: string }) => {
     const resp = await http.put<
       UpdateTodoApiResponseSchema | ErrorApiResponseSchema
     >(`todos/${id}`, body);
