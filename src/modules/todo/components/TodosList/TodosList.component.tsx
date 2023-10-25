@@ -1,13 +1,21 @@
+import { useI18nContext } from '@i18n/i18n-react';
 import { Icon } from '@iconify/react';
-import { Alert, Code } from '@mantine/core';
+import { Alert, Code, useMantineTheme } from '@mantine/core';
 import For from '@shared/components/atoms/For/For.atom';
-import TodosItem from '@todo/components/TodosItem/TodosItem.component';
-import useTodosList from './useTodosList.hook';
+import { TodoSchema } from '@todo/api/todo.schema';
+import {
+  useTodosFirestore,
+  useTodosParams,
+} from '@todo/hooks/useTodos/useTodos.hook';
+import TodosItem from '../TodosItem/TodosItem.component';
 
 export default function TodosList() {
-  const { LL, todosQuery, mantineTheme } = useTodosList();
+  const { LL } = useI18nContext();
+  const params = useTodosParams();
+  const todosQuery = useTodosFirestore(params);
+  const mantineTheme = useMantineTheme();
 
-  if (todosQuery.isLoading) {
+  if (todosQuery.status === 'loading') {
     return (
       <div
         data-testid="list-loading"
@@ -22,7 +30,7 @@ export default function TodosList() {
     );
   }
 
-  if (todosQuery.isError) {
+  if (todosQuery.error) {
     return (
       <Alert
         data-testid="list-error"
@@ -38,9 +46,9 @@ export default function TodosList() {
 
   return (
     <>
-      {todosQuery.isSuccess && (
+      {todosQuery.status === 'success' && (
         <For
-          each={todosQuery.data.todos}
+          each={todosQuery.data as TodoSchema[]}
           fallback={
             <div
               data-testid="list-empty"

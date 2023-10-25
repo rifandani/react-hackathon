@@ -1,6 +1,7 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { StrictMode } from 'react';
 import AppErrorBoundary from './providers/error/ErrorBoundary';
+import AppFirebaseProvider from './providers/firebase/FirebaseProvider';
 import AppI18nProvider from './providers/i18n/I18nProvider';
 import AppMantineProvider from './providers/mantine/MantineProvider';
 import AppQueryProvider from './providers/query/QueryProvider';
@@ -16,8 +17,10 @@ export default function App() {
           <AppI18nProvider>
             <AppMantineProvider>
               <AppToastProvider>
-                {/* router entry point */}
-                <AppRouterProvider />
+                <AppFirebaseProvider>
+                  {/* router entry point */}
+                  <AppRouterProvider />
+                </AppFirebaseProvider>
 
                 {/* PWA */}
                 <ReloadPromptSW />

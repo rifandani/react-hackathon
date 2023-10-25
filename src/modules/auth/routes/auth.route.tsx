@@ -1,16 +1,16 @@
-import { loginAction } from '@auth/pages/Login/Login.action';
-import { loginLoader } from '@auth/pages/Login/Login.loader';
 import RouteErrorBoundary from '@shared/components/templates/RouteErrorBoundary/RouteErrorBoundary.template';
 import { RouteObject } from 'react-router-dom';
 
 export const authId = {
   root: undefined,
   login: 'auth:login',
+  register: 'auth:register',
 } as const;
 
 export const authPath = {
   root: undefined,
   login: '/login',
+  register: '/register',
 } as const;
 
 export const loginRoute = {
@@ -20,9 +20,22 @@ export const loginRoute = {
     const { default: LoginPage } = await import('../pages/Login/Login.page');
 
     return {
-      action: loginAction,
-      loader: loginLoader,
       element: <LoginPage />,
+      errorElement: <RouteErrorBoundary />,
+    };
+  },
+} as const satisfies RouteObject;
+
+export const registerRoute = {
+  id: authId.register,
+  path: authPath.register,
+  lazy: async () => {
+    const { default: RegisterPage } = await import(
+      '../pages/Register/Register.page'
+    );
+
+    return {
+      element: <RegisterPage />,
       errorElement: <RouteErrorBoundary />,
     };
   },

@@ -43,7 +43,7 @@ export const todoHandlers = [
     const parsedSearchParams =
       resourceParamsSchema.safeParse(searchParamsObject);
 
-    if (!hasSearchParams || !parsedSearchParams.success)
+    if (!hasSearchParams || !parsedSearchParams.success) {
       return res(
         ctx.status(200),
         ctx.json({
@@ -53,6 +53,7 @@ export const todoHandlers = [
           total: 150,
         }),
       );
+    }
 
     const limit = parsedSearchParams.data.limit ?? 10;
     const skip = parsedSearchParams.data.skip ?? 0;
@@ -82,7 +83,7 @@ export const todoHandlers = [
     return res(
       ctx.status(400),
       ctx.json({
-        message: `ooppss, unknown error occurred`,
+        message: 'ooppss, unknown error occurred',
       }),
     );
   }),

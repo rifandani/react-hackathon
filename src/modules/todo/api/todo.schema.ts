@@ -3,14 +3,17 @@ import { resourceListSchema } from '../../shared/api/api.schema';
 
 // #region ENTITY SCHEMA
 export const todoSchema = z.object({
-  id: z.number().positive(),
+  id: z.string(),
   todo: z.string(),
   completed: z.boolean(),
-  userId: z.number().positive(),
+  userId: z.string(),
 });
 export const detailTodoSchema = todoSchema.pick({ id: true });
-export const createTodoSchema = todoSchema;
-export const updateTodoSchema = todoSchema.omit({ userId: true });
+export const createTodoSchema = todoSchema.omit({ id: true });
+export const updateTodoSchema = todoSchema.pick({
+  todo: true,
+  completed: true,
+});
 export const deleteTodoSchema = detailTodoSchema;
 // #endregion
 

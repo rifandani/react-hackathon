@@ -1,9 +1,5 @@
-import { queryClient } from '@app/providers/query/queryClient';
 import NavbarWrapper from '@shared/components/templates/NavbarWrapper/NavbarWrapper.template';
 import RouteErrorBoundary from '@shared/components/templates/RouteErrorBoundary/RouteErrorBoundary.template';
-import { todoAction } from '@todo/pages/Todo/Todo.action';
-import { todoLoader } from '@todo/pages/Todo/Todo.loader';
-import { todosLoader } from '@todo/pages/Todos/Todos.loader';
 import { RouteObject } from 'react-router-dom';
 
 export const todosId = {
@@ -14,7 +10,7 @@ export const todosId = {
 
 export const todosPath = {
   root: '/todos',
-  index: '',
+  index: undefined,
   detail: ':id',
 } as const;
 
@@ -25,8 +21,6 @@ const todosDetailRoute = {
     const { default: TodoPage } = await import('../pages/Todo/Todo.page');
 
     return {
-      action: todoAction(queryClient),
-      loader: todoLoader(queryClient),
       element: <TodoPage />,
       errorElement: <RouteErrorBoundary />,
     };
@@ -40,7 +34,6 @@ const todosIndexRoute = {
     const { default: TodosPage } = await import('../pages/Todos/Todos.page');
 
     return {
-      loader: todosLoader(queryClient),
       element: <TodosPage />,
       errorElement: <RouteErrorBoundary />,
     };

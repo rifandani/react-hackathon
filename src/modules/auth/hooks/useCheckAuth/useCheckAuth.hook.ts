@@ -21,23 +21,26 @@ export default function useCheckAuth() {
   const location = useLocation();
   const { user } = useUserStore();
 
+  const isLoginPath = location.pathname.includes('login');
+  const isRegisterPath = location.pathname.includes('register');
+
   useMount(() => {
-    if (!user && location.pathname.includes('login')) return;
+    if ((!user && isLoginPath) || (!user && isRegisterPath)) return;
 
     if (!user) {
       navigate(authPath.login, { replace: true });
       showNotification({
-        title: 'Error',
+        title: 'Auth Error',
         message: LL.common.unauthorized(),
         color: 'red',
       });
       return;
     }
 
-    if (location.pathname.includes('login')) {
+    if (isLoginPath || isRegisterPath) {
       navigate(homePath.root);
       showNotification({
-        title: 'Info',
+        title: 'Auth Info',
         message: LL.common.authorized(),
         color: 'blue',
       });

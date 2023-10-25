@@ -2,15 +2,17 @@ import type { Translation } from '../i18n-types.js';
 
 const id = {
   auth: {
-    welcome: 'Selamat Datang Kembali',
+    welcome: 'Selamat Datang',
+    welcomeBack: 'Selamat Datang Kembali',
     logoutUsername: 'Keluar ({username})',
     registerHere: 'Tidak punya akun? <>Daftar disini<>',
+    loginHere: 'Sudah punya akun? <>Masuk disini<>',
     notFound404: '404: Tidak Ditemukan',
     gone: 'Halaman yang Anda coba buka tidak ada. Anda mungkin salah mengetik alamat, atau halaman telah dipindahkan ke URL lain.',
     backTo: 'Kembali ke {isLoggedIn|{true: beranda, false: login}}',
   },
   home: {
-    title: 'Aplikasi React menggunakan:',
+    title: 'Templat Aplikasi - React',
     sortBtn: 'Sortir Tombol',
     clock: 'Jam',
     toggleClock: 'Beralih Jam',
@@ -22,6 +24,8 @@ const id = {
     backTo: 'Kembali ke {target}',
   },
   forms: {
+    email: 'Email',
+    emailPlaceholder: 'Email anda...',
     username: 'Username',
     usernamePlaceholder: 'Username anda...',
     password: 'Password',
@@ -29,6 +33,7 @@ const id = {
     error: '{icon} Error formulir',
     loginLoading: 'Sedang masuk...',
     login: 'Masuk',
+    registerLoading: 'Mendaftarkan...',
     register: 'Daftar',
     add: 'Tambah {icon}',
     remove: 'Hapus {icon}',
@@ -53,7 +58,7 @@ const id = {
     update: 'Ubah {icon}',
     remove: 'Hapus {icon}',
     empty: 'Tidak Ada Data',
-    unauthorized: 'Tidak Ada Akses',
+    unauthorized: 'Tidak ada akses. Silahkan masuk terlebih dahulu.',
     authorized: 'Sudah Ada Akses',
     unsavedChanges: 'Buang perubahan yang belum disimpan - anda yakin?',
     system: 'Sistem',

@@ -1,2 +1,2 @@
 export const defaultLimit = '10';
-export const limits = [defaultLimit, '25', '50', '100'];
+export const limits = [defaultLimit, '15', '20', '25'];

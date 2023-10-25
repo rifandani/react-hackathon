@@ -1,3 +1,4 @@
+import { showNotification } from '@mantine/notifications';
 import { deepReadObject } from '@rifandani/nxact-yutiriti';
 import React from 'react';
 import { extendTailwindMerge } from 'tailwind-merge';
@@ -199,3 +200,17 @@ export const tw = extendTailwindMerge({
     alert: ['alert'],
   },
 });
+
+/**
+ * common toast error
+ *
+ * @summary side-effect
+ */
+export const toastError = (err: unknown) => {
+  const error = err as Error;
+  showNotification({
+    color: 'red',
+    title: error.name,
+    message: error.message,
+  });
+};

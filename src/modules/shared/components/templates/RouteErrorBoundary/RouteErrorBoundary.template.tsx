@@ -1,4 +1,4 @@
-import { Button } from '@mantine/core';
+import { Button, Code, Container, Title } from '@mantine/core';
 import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
 
 export default function RouteErrorBoundary() {
@@ -23,11 +23,11 @@ export default function RouteErrorBoundary() {
 
     // the response json is automatically parsed to `error.data`, we also have access to the status
     return (
-      <main className="flex min-h-screen flex-col items-center justify-center">
-        <h1 className="text-primary-content mb-3">Something went wrong</h1>
+      <Container>
+        <Title>Something went wrong</Title>
 
         <Button
-          type="button"
+          variant="filled"
           onClick={() => {
             window.location.assign(window.location.href);
           }}
@@ -35,8 +35,8 @@ export default function RouteErrorBoundary() {
           Reload Page
         </Button>
 
-        <pre>{JSON.stringify(error, null, 2)}</pre>
-      </main>
+        <Code block>{JSON.stringify(error, null, 2)}</Code>
+      </Container>
     );
   }
 

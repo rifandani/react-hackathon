@@ -1,4 +1,6 @@
+import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
+import { useI18nContext } from '@i18n/i18n-react';
 import { Icon } from '@iconify/react';
 import {
   Avatar,
@@ -8,26 +10,36 @@ import {
   Divider,
   Drawer,
   Group,
+  MantineColorScheme,
   Menu,
   Text,
+  useMantineColorScheme,
 } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 import SvgIcon from '@shared/components/atoms/SvgIcon/SvgIcon.atom';
 import { todosPath } from '@todo/routes/todos.route';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useAuth, useUser } from 'reactfire';
 import classes from './Navbar.module.css';
-import useNavbar from './useNavbar.hook';
 
 export default function Navbar() {
-  const {
-    LL,
-    user,
-    colorScheme,
-    drawerOpened,
-    toggleDrawer,
-    closeDrawer,
-    onClickLogout,
-    onClickChangeTheme,
-  } = useNavbar();
+  const { LL } = useI18nContext();
+  const navigate = useNavigate();
+  const colorScheme = useMantineColorScheme();
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
+    useDisclosure(false);
+  const auth = useAuth();
+  const { data } = useUser();
+
+  // #region HANDLERS
+  const onClickLogout = async () => {
+    await auth.signOut(); // clear user store
+    navigate(authPath.login); // back to login page
+  };
+  const onClickChangeTheme = (theme: MantineColorScheme) => {
+    colorScheme.setColorScheme(theme);
+  };
+  // #endregion
 
   return (
     <Box>
@@ -118,14 +130,14 @@ export default function Navbar() {
               </Menu.Dropdown>
             </Menu>
 
-            {!!user && (
+            {!!data && (
               <Menu
                 position="bottom-end"
                 transitionProps={{ transition: 'pop' }}
               >
                 <Menu.Target>
                   <Avatar className="cursor-pointer">
-                    {user.username.slice(0, 2)}
+                    {(data.displayName ?? 'Unknown').slice(0, 2)}
                   </Avatar>
                 </Menu.Target>
 
@@ -135,6 +147,7 @@ export default function Navbar() {
                     component="button"
                     color="red"
                     leftSection={<Icon icon="lucide:log-out" />}
+                    // eslint-disable-next-line @typescript-eslint/no-misused-promises
                     onClick={onClickLogout}
                   >
                     Logout
@@ -189,6 +202,7 @@ export default function Navbar() {
               variant="light"
               color="red"
               leftSection={<Icon icon="lucide:log-out" />}
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onClickLogout}
             >
               Logout

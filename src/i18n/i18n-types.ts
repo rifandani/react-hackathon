@@ -16,9 +16,13 @@ export type Translations = RootTranslation
 type RootTranslation = {
 	auth: {
 		/**
-		 * W​e​l​c​o​m​e​ ​B​a​c​k
+		 * W​e​l​c​o​m​e
 		 */
 		welcome: string
+		/**
+		 * W​e​l​c​o​m​e​ ​B​a​c​k
+		 */
+		welcomeBack: string
 		/**
 		 * L​o​g​o​u​t​ ​(​{​u​s​e​r​n​a​m​e​}​)
 		 * @param {string} username
@@ -28,6 +32,10 @@ type RootTranslation = {
 		 * D​o​n​'​t​ ​h​a​v​e​ ​a​n​ ​a​c​c​o​u​n​t​?​ ​<​>​R​e​g​i​s​t​e​r​ ​h​e​r​e​<​>
 		 */
 		registerHere: string
+		/**
+		 * A​l​r​e​a​d​y​ ​h​a​v​e​ ​a​n​ ​a​c​c​o​u​n​t​?​ ​<​>​L​o​g​i​n​ ​h​e​r​e​<​>
+		 */
+		loginHere: string
 		/**
 		 * 4​0​4​:​ ​N​o​t​ ​F​o​u​n​d
 		 */
@@ -44,7 +52,7 @@ type RootTranslation = {
 	}
 	home: {
 		/**
-		 * R​e​a​c​t​ ​A​p​p​ ​u​s​i​n​g​:
+		 * A​p​p​ ​T​e​m​p​l​a​t​e​ ​-​ ​R​e​a​c​t
 		 */
 		title: string
 		/**
@@ -81,6 +89,14 @@ type RootTranslation = {
 	}
 	forms: {
 		/**
+		 * E​m​a​i​l
+		 */
+		email: string
+		/**
+		 * Y​o​u​r​ ​e​m​a​i​l​.​.​.
+		 */
+		emailPlaceholder: string
+		/**
 		 * U​s​e​r​n​a​m​e
 		 */
 		username: string
@@ -109,6 +125,10 @@ type RootTranslation = {
 		 * L​o​g​i​n
 		 */
 		login: string
+		/**
+		 * R​e​g​i​s​t​e​r​i​n​g​.​.​.
+		 */
+		registerLoading: string
 		/**
 		 * R​e​g​i​s​t​e​r
 		 */
@@ -277,9 +297,13 @@ type RootTranslation = {
 export type TranslationFunctions = {
 	auth: {
 		/**
-		 * Welcome Back
+		 * Welcome
 		 */
 		welcome: () => LocalizedString
+		/**
+		 * Welcome Back
+		 */
+		welcomeBack: () => LocalizedString
 		/**
 		 * Logout ({username})
 		 */
@@ -288,6 +312,10 @@ export type TranslationFunctions = {
 		 * Don't have an account? <>Register here<>
 		 */
 		registerHere: () => LocalizedString
+		/**
+		 * Already have an account? <>Login here<>
+		 */
+		loginHere: () => LocalizedString
 		/**
 		 * 404: Not Found
 		 */
@@ -303,7 +331,7 @@ export type TranslationFunctions = {
 	}
 	home: {
 		/**
-		 * React App using:
+		 * App Template - React
 		 */
 		title: () => LocalizedString
 		/**
@@ -339,6 +367,14 @@ export type TranslationFunctions = {
 	}
 	forms: {
 		/**
+		 * Email
+		 */
+		email: () => LocalizedString
+		/**
+		 * Your email...
+		 */
+		emailPlaceholder: () => LocalizedString
+		/**
 		 * Username
 		 */
 		username: () => LocalizedString
@@ -366,6 +402,10 @@ export type TranslationFunctions = {
 		 * Login
 		 */
 		login: () => LocalizedString
+		/**
+		 * Registering...
+		 */
+		registerLoading: () => LocalizedString
 		/**
 		 * Register
 		 */
