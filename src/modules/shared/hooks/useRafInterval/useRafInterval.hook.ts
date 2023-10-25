@@ -28,17 +28,13 @@ const setRafInterval = (callback: () => void, delay = 0): Handle => {
   return handle;
 };
 
-function cancelAnimationFrameIsNotDefined(t: unknown): t is NodeJS.Timer {
-  return typeof cancelAnimationFrame === typeof undefined;
-}
-
 const clearRafInterval = (handle: Handle) => {
-  if (cancelAnimationFrameIsNotDefined(handle.id)) {
+  if (typeof cancelAnimationFrame === typeof undefined) {
     /** @ts-expect-error ignore it */
     clearInterval(handle.id);
     return;
   }
-  cancelAnimationFrame(handle.id);
+  cancelAnimationFrame(handle.id as number);
 };
 
 /**

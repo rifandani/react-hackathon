@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 // #region SCHEMAS
 export const loginSchema = z.object({
-  username: z.string().min(3, 'username must contain at least 3 characters'),
+  email: z.string().email(),
   password: z.string().min(6, 'password must contain at least 6 characters'),
   expiresInMins: z.number().optional(),
 });

@@ -1,13 +1,15 @@
 import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
+import { useI18nContext } from '@i18n/i18n-react';
 import { Button, Container, Group, Text, Title } from '@mantine/core';
 import SvgIcon from '@shared/components/atoms/SvgIcon/SvgIcon.atom';
 import { Link } from 'react-router-dom';
+import { useSigninCheck } from 'reactfire';
 import classes from './NotFound.module.css';
-import useNotFoundPageVM from './NotFound.vm';
 
 export default function NotFoundPage() {
-  const { userStore, LL } = useNotFoundPageVM();
+  const { LL } = useI18nContext();
+  const { data } = useSigninCheck();
 
   return (
     <Container className={classes.root}>
@@ -34,10 +36,10 @@ export default function NotFoundPage() {
             <Button
               size="md"
               component={Link}
-              to={userStore.user ? homePath.root : authPath.login}
+              to={data.signedIn ? homePath.root : authPath.login}
             >
               {LL.auth.backTo({
-                isLoggedIn: userStore.user ? 'true' : 'false',
+                isLoggedIn: data.signedIn ? 'true' : 'false',
               })}
             </Button>
           </Group>

@@ -12,8 +12,5 @@ export function checkAuthUser() {
   const parsedAppUser = JSON.parse(appUser) as UserStoreLocalStorage;
   const parsed = userStoreLocalStorageSchema.safeParse(parsedAppUser);
 
-  if (!parsed.success) return false;
-  if (!parsed.data.state.user) return false;
-
-  return true;
+  return parsed.success && parsed.data.state.user;
 }

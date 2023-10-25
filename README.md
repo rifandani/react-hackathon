@@ -18,23 +18,38 @@ React app built with:
 - `@mantine/hooks` -> collection of useful react custom hooks
 - `@rifandani/nxact-yutiriti` -> collection of useful utils
 - `dayjs` -> collection of useful date utils (required if when we use `@mantine/dates`)
+- `firebase` + `reactfire` -> using firebase firestore, storage, realtime database, auth, remote config, hosting
 - `vite-plugin-pwa` + `@vite-pwa/assets-generator` + `@rollup/plugin-replace` + `https-localhost` + `workbox-core` + `workbox-precaching` + `workbox-routing` + `workbox-window` -> Progressive Web App (PWA)
 
 ## Development
 
 Rename `.env.development.example` to `.env.development`.
-Rename `.env.staging.example` to `.env.staging`.
 Rename `.env.production.example` to `.env.production`.
+
+We use firebase free services to accelerate the short development and integrate with firebase CLI, so make sure to install `firebase-tools` as global dependencies.
+
+```bash
+# install firebase CLI
+$ npm i -g firebase-tools
+```
+
+We also running firebase emulators suite UI in development. Currently we only use "firestore", "storage", "database", "auth", and not "functions", "pubsub" and "eventarc".
+
+When we start firebase emulator, it will try to import the seed data from `./firebase-data` folder. And when we stop the server, it will try to update & export your latest data to `./firebase-data` folder.
+
+To start, first try to install and then run the app.
 
 ```bash
 # install deps
 $ pnpm install
 
-# Runs the app + PWA + sync with i18n changes
-$ pnpm on:dev
+# Runs the app with PWA + sync with i18n changes + firebase emulators
+$ pnpm onfire:dev
 ```
 
 ## Testing
+
+In hackathon, we don't even need to care about testing. Just focus on solving the problem.
 
 ```bash
 # run test
@@ -47,9 +62,6 @@ $ pnpm test:coverage
 ## Build
 
 ```bash
-# build app in "staging" mode
-$ pnpm build:staging
-
 # build app in "production" mode
 $ pnpm build
 ```
@@ -60,6 +72,7 @@ PWA relies on [https-localhost](https://github.com/daquinoaldo/https-localhost) 
 Please refer to it's docs for the steps to setup your local environment.
 
 ```bash
+# build and serve using https
 pnpm start
 ```
 
@@ -67,9 +80,6 @@ Open up https://localhost/, then restart the server, you will see a notification
 
 ## Deployment
 
-For now only supports deployment to Vercel.
-Check out `vercel.json` file fo further details.
-
-## Notes
-
-- [ ] fix unit tests
+We supports deployment to Vercel and Firebase Hosting.
+Check out `vercel.json` for Vercel.
+Check out `firebase.json` for Firebase Hosting.

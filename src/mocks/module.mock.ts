@@ -1,7 +1,5 @@
-import * as reactAria from 'react-aria';
 import { vi } from 'vitest';
 import * as zustand from 'zustand';
-import { tSpy } from './react-aria.mock';
 import { storeResetFns } from './zustand.mock';
 
 // mock ResizeObserver
@@ -70,14 +68,5 @@ vi.mock('zustand', async () => {
   return {
     create,
     createStore,
-  };
-});
-
-vi.mock('react-aria', async () => {
-  const all = await vi.importActual<typeof reactAria>('react-aria');
-
-  return {
-    ...all,
-    useMessageFormatter: () => tSpy,
   };
 });

@@ -1,14 +1,18 @@
 import reactjs from '@assets/images/reactjs.svg';
-import LoginForm from '@auth/components/LoginForm/LoginForm.component';
+import LoginForm from '@auth/components/LoginForm/LoginForm';
+import LoginProvider from '@auth/components/LoginProvider/LoginProvider';
+import useCheckAuthFirebase from '@auth/hooks/useCheckAuth/useCheckAuthFirebase.hook';
+import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
+import { useI18nContext } from '@i18n/i18n-react';
 import { Icon } from '@iconify/react';
 import { ActionIcon, Anchor, Image } from '@mantine/core';
 import { WrapTranslation } from '@shared/components/atoms/WrapTranslation/WrapTranslation';
 import { Link } from 'react-router-dom';
-import useLoginPageVM from './Login.vm';
 
 export default function LoginPage() {
-  const { LL } = useLoginPageVM();
+  useCheckAuthFirebase();
+  const { LL } = useI18nContext();
 
   return (
     <main className="h-screen">
@@ -28,8 +32,10 @@ export default function LoginPage() {
 
           <div className="my-auto flex flex-col justify-center px-8 pt-8 md:justify-start md:px-24 md:pt-0 lg:px-32">
             <h1 className="text-primary text-center text-3xl">
-              {LL.auth.welcome()}
+              {LL.auth.welcomeBack()}
             </h1>
+
+            <LoginProvider />
 
             <LoginForm />
 
@@ -37,11 +43,7 @@ export default function LoginPage() {
               <WrapTranslation
                 message={LL.auth.registerHere()}
                 Component={(infix) => (
-                  <Anchor
-                    aria-label="link-register"
-                    component={Link}
-                    to="/register"
-                  >
+                  <Anchor component={Link} to={authPath.register}>
                     {' '}
                     {infix}
                   </Anchor>

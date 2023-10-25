@@ -1,9 +1,11 @@
+import useCheckAuthFirebase from '@auth/hooks/useCheckAuth/useCheckAuthFirebase.hook';
 import HomeClock from '@home/components/HomeClock/HomeClock.component';
+import { useI18nContext } from '@i18n/i18n-react';
 import { Container, Text } from '@mantine/core';
-import useHomePageVM from './Home.vm';
 
 export default function HomePage() {
-  const { LL } = useHomePageVM();
+  useCheckAuthFirebase();
+  const { LL } = useI18nContext();
 
   return (
     <Container pt="md">

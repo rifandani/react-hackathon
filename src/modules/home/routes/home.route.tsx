@@ -1,4 +1,3 @@
-import { homeLoader } from '@home/pages/Home.loader';
 import NavbarWrapper from '@shared/components/templates/NavbarWrapper/NavbarWrapper.template';
 import RouteErrorBoundary from '@shared/components/templates/RouteErrorBoundary/RouteErrorBoundary.template';
 import { RouteObject } from 'react-router-dom';
@@ -10,7 +9,7 @@ export const homeId = {
 
 export const homePath = {
   root: '/',
-  index: '',
+  index: undefined,
 } as const;
 
 const homeIndexRoute = {
@@ -20,7 +19,7 @@ const homeIndexRoute = {
     const { default: HomePage } = await import('../pages/Home.page');
 
     return {
-      loader: homeLoader,
+      // loader: homeLoader, // we use firebase authentication instead of this
       element: <HomePage />,
       errorElement: <RouteErrorBoundary />,
     };

@@ -2,15 +2,17 @@ import type { BaseTranslation } from '../i18n-types.js';
 
 const en = {
   auth: {
-    welcome: 'Welcome Back',
+    welcome: 'Welcome',
+    welcomeBack: 'Welcome Back',
     logoutUsername: 'Logout ({username:string})',
     registerHere: "Don't have an account? <>Register here<>",
+    loginHere: 'Already have an account? <>Login here<>',
     notFound404: '404: Not Found',
     gone: 'Page you are trying to open does not exist. You may have mistyped the address, or the page has been moved to another URL.',
     backTo: 'Go back to {isLoggedIn|{true: home, false: login}}',
   },
   home: {
-    title: 'React App using:',
+    title: 'App Template - React',
     sortBtn: 'Sort Buttons',
     clock: 'Clock',
     toggleClock: 'Toggle Clock',
@@ -22,6 +24,8 @@ const en = {
     backTo: 'Go back to {target:string}',
   },
   forms: {
+    email: 'Email',
+    emailPlaceholder: 'Your email...',
     username: 'Username',
     usernamePlaceholder: 'Your username...',
     password: 'Password',
@@ -29,6 +33,7 @@ const en = {
     error: '{icon:string} Form error',
     loginLoading: 'Logging in...',
     login: 'Login',
+    registerLoading: 'Registering...',
     register: 'Register',
     add: 'Add {icon:string}',
     remove: 'Remove {icon:string}',
