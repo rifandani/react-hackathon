@@ -16,7 +16,7 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import SvgIcon from '@shared/components/atoms/SvgIcon/SvgIcon.atom';
+import SvgIcon from '@shared/components/dumb/SvgIcon/SvgIcon.atom';
 import { todosPath } from '@todo/routes/todos.route';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth, useUser } from 'reactfire';

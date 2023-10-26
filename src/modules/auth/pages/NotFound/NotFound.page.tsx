@@ -2,7 +2,7 @@ import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
 import { useI18nContext } from '@i18n/i18n-react';
 import { Button, Container, Group, Text, Title } from '@mantine/core';
-import SvgIcon from '@shared/components/atoms/SvgIcon/SvgIcon.atom';
+import SvgIcon from '@shared/components/dumb/SvgIcon/SvgIcon.atom';
 import { Link } from 'react-router-dom';
 import { useSigninCheck } from 'reactfire';
 import classes from './NotFound.module.css';

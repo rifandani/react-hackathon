@@ -1,7 +1,7 @@
 import { useI18nContext } from '@i18n/i18n-react';
 import { Icon } from '@iconify/react';
 import { Alert, Code, useMantineTheme } from '@mantine/core';
-import For from '@shared/components/atoms/For/For.atom';
+import For from '@shared/components/dumb/For/For.atom';
 import { TodoSchema } from '@todo/api/todo.schema';
 import {
   useTodosFirestore,

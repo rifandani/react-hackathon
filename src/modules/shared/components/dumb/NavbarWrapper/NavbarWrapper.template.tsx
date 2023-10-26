@@ -1,4 +1,4 @@
-import Navbar from '@shared/components/organisms/Navbar/Navbar.organism';
+import Navbar from '@shared/components/smart/Navbar/Navbar.organism';
 import { Outlet } from 'react-router-dom';
 
 export default function NavbarWrapper() {
