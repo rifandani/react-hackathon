@@ -1,6 +1,6 @@
-# React App
+# React Hackathon Template
 
-React app built with:
+React Hackathon Template built with:
 
 - `vite` + `typescript` + `eslint` + `prettier` -> development productivity
 - `vitest` + `@testing-library/react` -> unit test, integration test, coverage
@@ -43,20 +43,14 @@ To start, first try to install and then run the app.
 # install deps
 $ pnpm install
 
-# Runs the app with PWA + sync with i18n changes + firebase emulators
-$ pnpm onfire:dev
-```
+# running firebase emulators concurrently with the app seems to not work correctly
+# so we need to run it in separate terminal
 
-## Testing
+# Runs the app with PWA + sync with i18n changes
+$ pnpm on:dev
 
-In hackathon, we don't even need to care about testing. Just focus on solving the problem.
-
-```bash
-# run test
-$ pnpm test
-
-# coverage with instanbul
-$ pnpm test:coverage
+# Runs the firebase emulator in another terminal
+$ pnpm emu:start
 ```
 
 ## Build
@@ -80,6 +74,5 @@ Open up https://localhost/, then restart the server, you will see a notification
 
 ## Deployment
 
-We supports deployment to Vercel and Firebase Hosting.
-Check out `vercel.json` for Vercel.
-Check out `firebase.json` for Firebase Hosting.
+We supports deployment to Vercel and Firebase Hosting. We recommends using firebase hosting.
+Check out `firebase.json` for Firebase Hosting. Check out `vercel.json` for Vercel.

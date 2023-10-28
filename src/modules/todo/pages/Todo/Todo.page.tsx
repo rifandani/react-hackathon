@@ -100,7 +100,6 @@ export default function TodoPage() {
 
       {todoQuery.status === 'error' && (
         <Alert
-          data-testid="todo-error"
           variant="light"
           color="red"
           title="Todo query error"
@@ -112,7 +111,6 @@ export default function TodoPage() {
 
       {todoQuery.status === 'success' && (
         <form
-          data-testid={`Todo-${(todoQuery.data as TodoSchema).id}`}
           className="flex items-center gap-3"
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onSubmit={form.handleSubmit(onSubmitUpdate)}

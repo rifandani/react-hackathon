@@ -7,7 +7,7 @@ import { homePath } from '@home/routes/home.route';
 import { useI18nContext } from '@i18n/i18n-react';
 import { Icon } from '@iconify/react';
 import { ActionIcon, Anchor, Image } from '@mantine/core';
-import { WrapTranslation } from '@shared/components/atoms/WrapTranslation/WrapTranslation';
+import { WrapTranslation } from '@shared/components/dumb/WrapTranslation/WrapTranslation';
 import { Link } from 'react-router-dom';
 
 export default function LoginPage() {

@@ -11,7 +11,8 @@
       "@playground/*": ["./modules/playground/*"],
       "@setting/*": ["./modules/setting/*"],
       "@shared/*": ["./modules/shared/*"],
-      "@todo/*": ["./modules/todo/*"]
+      "@todo/*": ["./modules/todo/*"],
+      "@product/*": ["./modules/product/*"]
     }
   }
 }

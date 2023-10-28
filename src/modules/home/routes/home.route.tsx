@@ -1,5 +1,5 @@
-import NavbarWrapper from '@shared/components/templates/NavbarWrapper/NavbarWrapper.template';
-import RouteErrorBoundary from '@shared/components/templates/RouteErrorBoundary/RouteErrorBoundary.template';
+import NavbarWrapper from '@shared/components/dumb/NavbarWrapper/NavbarWrapper';
+import RouteErrorBoundary from '@shared/components/smart/RouteErrorBoundary/RouteErrorBoundary';
 import { RouteObject } from 'react-router-dom';
 
 export const homeId = {

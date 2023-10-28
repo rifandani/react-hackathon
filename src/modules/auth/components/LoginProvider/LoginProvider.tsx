@@ -47,7 +47,6 @@ export default function LoginProvider() {
 
   return (
     <form
-      data-testid="LoginProvider"
       className="flex flex-col"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={signInWithGoogle}
