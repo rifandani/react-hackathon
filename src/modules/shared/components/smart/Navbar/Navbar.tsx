@@ -16,7 +16,8 @@ import {
   useMantineColorScheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import SvgIcon from '@shared/components/dumb/SvgIcon/SvgIcon.atom';
+import { productsPath } from '@product/routes/products.route';
+import SvgIcon from '@shared/components/dumb/SvgIcon/SvgIcon';
 import { todosPath } from '@todo/routes/todos.route';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAuth, useUser } from 'reactfire';
@@ -36,7 +37,7 @@ export default function Navbar() {
     await auth.signOut(); // clear user store
     navigate(authPath.login); // back to login page
   };
-  const onClickChangeTheme = (theme: MantineColorScheme) => {
+  const onClickChangeTheme = (theme: MantineColorScheme) => () => {
     colorScheme.setColorScheme(theme);
   };
   // #endregion
@@ -57,6 +58,10 @@ export default function Navbar() {
 
             <NavLink to={todosPath.root} className={classes.link}>
               Todos
+            </NavLink>
+
+            <NavLink to={productsPath.root} className={classes.link}>
+              Products
             </NavLink>
           </Group>
 
@@ -91,9 +96,7 @@ export default function Navbar() {
                       <Icon icon="lucide:check" />
                     ) : undefined
                   }
-                  onClick={() => {
-                    onClickChangeTheme('auto');
-                  }}
+                  onClick={onClickChangeTheme('auto')}
                 >
                   {LL.common.system()}
                 </Menu.Item>
@@ -106,9 +109,7 @@ export default function Navbar() {
                       <Icon icon="lucide:check" />
                     ) : undefined
                   }
-                  onClick={() => {
-                    onClickChangeTheme('light');
-                  }}
+                  onClick={onClickChangeTheme('light')}
                 >
                   {LL.common.light()}
                 </Menu.Item>
@@ -121,9 +122,7 @@ export default function Navbar() {
                       <Icon icon="lucide:check" />
                     ) : undefined
                   }
-                  onClick={() => {
-                    onClickChangeTheme('dark');
-                  }}
+                  onClick={onClickChangeTheme('dark')}
                 >
                   {LL.common.dark()}
                 </Menu.Item>
@@ -193,6 +192,9 @@ export default function Navbar() {
             </NavLink>
             <NavLink to={todosPath.root} className={classes.link}>
               Todos
+            </NavLink>
+            <NavLink to={productsPath.root} className={classes.link}>
+              Products
             </NavLink>
 
             <Divider my="sm" />

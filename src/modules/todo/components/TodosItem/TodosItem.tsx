@@ -77,17 +77,11 @@ export default function TodosItem({ todo }: Props) {
 
   return (
     <form
-      data-testid={`TodosItem-${todo.id}`}
       className="mb-2 flex items-center justify-between duration-300 ease-in-out animate-in slide-in-from-left-5"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={onSubmitDeleteTodo(todo)}
     >
-      <input
-        data-testid={`TodosItem-${todo.id}-todoId`}
-        type="hidden"
-        name="todoId"
-        value={todo.id}
-      />
+      <input type="hidden" name="todoId" value={todo.id} />
 
       <Checkbox
         name={`todo-${todo.id}`}

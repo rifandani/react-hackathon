@@ -1,4 +1,3 @@
-import useCheckAuthFirebase from '@auth/hooks/useCheckAuth/useCheckAuthFirebase.hook';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useI18nContext } from '@i18n/i18n-react';
 import { Button, Modal, TextInput } from '@mantine/core';
@@ -14,7 +13,6 @@ import { useBeforeUnload } from 'react-router-dom';
 import { useFirestore, useUser } from 'reactfire';
 
 export default function TodosCreate() {
-  useCheckAuthFirebase();
   const [isModalOpen, { open, close }] = useDisclosure(false);
   const { LL } = useI18nContext();
   const user = useUser();
@@ -74,7 +72,6 @@ export default function TodosCreate() {
   return (
     <>
       <form
-        data-testid="TodosCreate"
         className="mb-3 flex w-full flex-col gap-3 duration-300 lg:flex-row"
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onSubmit={form.handleSubmit(onSubmitTodo)}

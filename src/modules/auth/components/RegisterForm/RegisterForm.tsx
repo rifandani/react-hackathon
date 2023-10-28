@@ -45,7 +45,6 @@ export default function RegisterForm() {
 
   return (
     <form
-      data-testid="RegisterForm"
       className="flex flex-col"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={form.handleSubmit(createUserWithEmailPassword)}

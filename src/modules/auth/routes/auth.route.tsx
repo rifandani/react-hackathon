@@ -1,4 +1,4 @@
-import RouteErrorBoundary from '@shared/components/smart/RouteErrorBoundary/RouteErrorBoundary.template';
+import RouteErrorBoundary from '@shared/components/smart/RouteErrorBoundary/RouteErrorBoundary';
 import { RouteObject } from 'react-router-dom';
 
 export const authId = {

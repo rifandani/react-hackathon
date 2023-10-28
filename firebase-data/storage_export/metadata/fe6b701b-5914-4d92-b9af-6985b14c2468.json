@@ -1,0 +1,19 @@
+{
+  "name": "images/products/taj.jpg",
+  "bucket": "app-template-rifandani.appspot.com",
+  "metageneration": 1,
+  "generation": 1698422042399,
+  "contentType": "image/jpeg",
+  "storageClass": "STANDARD",
+  "contentDisposition": "inline",
+  "downloadTokens": [
+    "452f6b2b-c193-4e64-900e-68d56b5445de"
+  ],
+  "etag": "5W3As2XSunYxRcGia8QYAyuy0jg",
+  "customMetadata": {},
+  "timeCreated": "2023-10-27T15:54:02.400Z",
+  "updated": "2023-10-27T15:54:02.400Z",
+  "size": 59753,
+  "md5Hash": "bAYWmE/0CIEIz4K0+rESbw==",
+  "crc32c": "622467443"
+}

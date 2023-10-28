@@ -1,0 +1,97 @@
+import { useI18nContext } from '@i18n/i18n-react';
+import { Button, Card, Divider, Image, Stack, Text } from '@mantine/core';
+import { showNotification } from '@mantine/notifications';
+import { ProductSchema } from '@product/api/product.schema';
+import { getProductDocument } from '@product/utils/products.util';
+import { toastError } from '@shared/utils/helper/helper.util';
+import { deleteDoc } from 'firebase/firestore';
+import { FormEvent } from 'react';
+import { useFirestore, useUser } from 'reactfire';
+import classes from './ProductsItem.module.css';
+
+interface Props {
+  product: ProductSchema;
+}
+
+export default function ProductsItem({ product }: Props) {
+  const user = useUser();
+  const { LL } = useI18nContext();
+  const firestore = useFirestore();
+
+  // #region HANDLERS
+  const onSubmitDeleteProduct =
+    (_product: ProductSchema) => async (evt: FormEvent<HTMLFormElement>) => {
+      evt.preventDefault();
+
+      // only allow user who belongs the product
+      if (_product.userId !== user.data?.uid) return;
+
+      try {
+        // reference to the product document in products collection
+        const productDoc = getProductDocument(firestore, _product.id);
+
+        // delete product document
+        await deleteDoc(productDoc);
+
+        showNotification({
+          color: 'green',
+          title: 'Mutation Success',
+          message: `Product with id: ${_product.id} deleted`,
+        });
+      } catch (err) {
+        toastError(err);
+      }
+    };
+  // #endregion
+
+  return (
+    <form
+      id={`product-${product.id}`}
+      className="duration-300 ease-in-out animate-in slide-in-from-left-5"
+      // eslint-disable-next-line @typescript-eslint/no-misused-promises
+      onSubmit={onSubmitDeleteProduct(product)}
+    >
+      <input type="hidden" name="productId" value={product.id} />
+
+      <Card withBorder radius="md" className={classes.card}>
+        <Card.Section className={classes.imageSection}>
+          <Image
+            src={product.imageUrl}
+            alt={product.title}
+            className="h-40 w-full object-cover"
+          />
+        </Card.Section>
+
+        <Card.Section className={classes.section}>
+          <Stack>
+            <Text fz="xl" fw={700}>
+              {product.title}
+            </Text>
+
+            <Divider />
+
+            <Text fz="lg">
+              {Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR',
+              }).format(product.price)}
+            </Text>
+
+            <Text fz="sm" c="dimmed">
+              {product.stock} left
+            </Text>
+
+            {product.userId === user.data?.uid && (
+              <>
+                <Divider />
+                <Button type="submit" color="red" variant="subtle">
+                  {LL.forms.remove({ icon: '💥' })}
+                </Button>
+              </>
+            )}
+          </Stack>
+        </Card.Section>
+      </Card>
+    </form>
+  );
+}

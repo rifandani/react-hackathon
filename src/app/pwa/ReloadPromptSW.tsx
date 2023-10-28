@@ -53,7 +53,7 @@ export default function ReloadPromptSW() {
   };
 
   return (
-    <Affix data-testid="ReloadPromptSW" position={{ bottom: 20, right: 20 }}>
+    <Affix id="ReloadPromptSW" position={{ bottom: 20, right: 20 }}>
       <Transition transition="slide-up" mounted={offlineReady || needRefresh}>
         {(transitionStyles) => (
           <Paper

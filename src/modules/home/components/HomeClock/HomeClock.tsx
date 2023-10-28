@@ -103,12 +103,7 @@ export default function HomeClock() {
         timingFunction="ease"
       >
         {(styles) => (
-          <Card
-            data-testid="home-clock-show"
-            mt="md"
-            shadow="md"
-            style={styles}
-          >
+          <Card mt="md" shadow="md" style={styles}>
             <Card.Section pt="md" px="md">
               <Stack>
                 <Text>{LL.home.clock()}:</Text>
@@ -134,7 +129,6 @@ export default function HomeClock() {
       >
         {buttons.map((btn) => (
           <Button
-            data-testid={`home-clock-button-${btn.id}`}
             key={btn.id}
             variant={btn.variant}
             onClick={() => {

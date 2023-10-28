@@ -45,7 +45,6 @@ export default function LoginForm() {
 
   return (
     <form
-      data-testid="LoginForm"
       className="flex flex-col"
       // eslint-disable-next-line @typescript-eslint/no-misused-promises
       onSubmit={form.handleSubmit(signInWithEmailPassword)}

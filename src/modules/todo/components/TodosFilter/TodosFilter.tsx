@@ -20,7 +20,7 @@ export default function TodosFilter() {
   // #endregion
 
   return (
-    <form data-testid="TodosFilter" className="mb-3 flex w-full flex-col">
+    <form className="mb-3 flex w-full flex-col">
       <Select
         classNames={{
           wrapper: 'w-fit',
