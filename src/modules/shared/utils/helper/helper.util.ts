@@ -2,6 +2,7 @@ import { showNotification } from '@mantine/notifications';
 import { deepReadObject } from '@rifandani/nxact-yutiriti';
 import React from 'react';
 import { extendTailwindMerge } from 'tailwind-merge';
+import { UnknownRecord } from 'type-fest';
 
 // declare a type that works with generic components
 type FixedForwardRef = <T, P = object>(
@@ -214,3 +215,20 @@ export const toastError = (err: unknown) => {
     message: error.message,
   });
 };
+
+/**
+ * This is useful if we want a data to be passed as JSON, there should not be any `undefined` values within the object
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function recursivelyNullifyUndefinedValues(obj: UnknownRecord) {
+  Object.entries(obj).forEach(([key, value]) => {
+    if (!!value && typeof value === 'object') {
+      recursivelyNullifyUndefinedValues(value as UnknownRecord);
+    } else if (value === undefined) {
+      // eslint-disable-next-line no-param-reassign
+      obj[key] = null;
+    }
+  });
+
+  return obj;
+}

@@ -1,34 +1,35 @@
-import { LoginSchema, loginSchema } from '@auth/api/auth.schema';
+import { loginFormSchema, type LoginFormSchema } from '@auth/api/auth.schema';
 import { loginFormDefaultValues } from '@auth/constants/login.constant';
 import { homePath } from '@home/routes/home.route';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useI18nContext } from '@i18n/i18n-react';
-import { Button, PasswordInput, TextInput } from '@mantine/core';
+import { Button } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
+import PasswordInputForm from '@shared/components/smart/PasswordInputForm/PasswordInputForm';
+import TextInputForm from '@shared/components/smart/TextInputForm/TextInputForm';
 import { toastError } from '@shared/utils/helper/helper.util';
 import { signInWithEmailAndPassword } from 'firebase/auth';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Form, useForm, type FormSubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from 'reactfire';
 
 export default function LoginForm() {
   const { LL } = useI18nContext();
   const navigate = useNavigate();
-  const form = useForm<LoginSchema>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: loginFormDefaultValues,
+  const form = useForm<LoginFormSchema>({
     mode: 'onChange',
+    resolver: zodResolver(loginFormSchema),
+    defaultValues: loginFormDefaultValues,
   });
   const auth = useAuth();
 
-  const signInWithEmailPassword: SubmitHandler<LoginSchema> = async (
-    values,
-  ) => {
+  const onSubmitLogin: FormSubmitHandler<LoginFormSchema> = async (values) => {
     try {
+      // sign in user
       const { user } = await signInWithEmailAndPassword(
         auth,
-        values.email,
-        values.password,
+        values.data.email,
+        values.data.password,
       );
 
       // on success
@@ -44,36 +45,28 @@ export default function LoginForm() {
   };
 
   return (
-    <form
+    <Form
       className="flex flex-col"
-      // eslint-disable-next-line @typescript-eslint/no-misused-promises
-      onSubmit={form.handleSubmit(signInWithEmailPassword)}
+      control={form.control}
+      onSubmit={onSubmitLogin}
     >
       {/* email */}
-      <TextInput
-        className="pt-4"
+      <TextInputForm
+        control={form.control}
+        name="email"
         type="email"
+        className="pt-4"
         label={LL.forms.email()}
         placeholder={LL.forms.emailPlaceholder()}
-        error={
-          form.formState.errors.email?.message
-            ? LL.error.minLength({ field: 'email', length: 3 })
-            : undefined
-        }
-        {...form.register('email', { required: true, minLength: 3 })}
       />
 
       {/* password */}
-      <PasswordInput
+      <PasswordInputForm
+        control={form.control}
+        name="password"
         className="pt-4"
         label={LL.forms.password()}
         placeholder={LL.forms.passwordPlaceholder()}
-        error={
-          form.formState.errors.password?.message
-            ? LL.error.minLength({ field: 'password', length: 6 })
-            : undefined
-        }
-        {...form.register('password', { required: true, minLength: 6 })}
       />
 
       <Button
@@ -84,6 +77,6 @@ export default function LoginForm() {
       >
         {LL.forms[form.formState.isSubmitting ? 'loginLoading' : 'login']()}{' '}
       </Button>
-    </form>
+    </Form>
   );
 }

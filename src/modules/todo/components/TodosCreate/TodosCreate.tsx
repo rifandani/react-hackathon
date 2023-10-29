@@ -1,14 +1,15 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useI18nContext } from '@i18n/i18n-react';
-import { Button, Modal, TextInput } from '@mantine/core';
+import { Button, Modal } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { showNotification } from '@mantine/notifications';
+import TextInputForm from '@shared/components/smart/TextInputForm/TextInputForm';
 import { toastError } from '@shared/utils/helper/helper.util';
 import { CreateTodoSchema, createTodoSchema } from '@todo/api/todo.schema';
 import { getTodosCollection } from '@todo/utils/todos.util';
 import { addDoc } from 'firebase/firestore';
 import { useCallback } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Form, FormSubmitHandler, useForm } from 'react-hook-form';
 import { useBeforeUnload } from 'react-router-dom';
 import { useFirestore, useUser } from 'reactfire';
 
@@ -17,26 +18,20 @@ export default function TodosCreate() {
   const { LL } = useI18nContext();
   const user = useUser();
   const firestore = useFirestore();
-  const todosCollection = getTodosCollection(firestore);
 
   const form = useForm<CreateTodoSchema>({
     resolver: zodResolver(createTodoSchema),
-    defaultValues: {
+    values: {
+      userId: user.data?.uid ?? 'unknown-user-id',
       todo: '',
-      userId: '',
       completed: false,
     },
   });
 
-  // #region HANDLERS
-  const onSubmitTodo: SubmitHandler<CreateTodoSchema> = async (data) => {
-    const payload: CreateTodoSchema = {
-      ...data,
-      userId: user.data?.uid ?? 'unknown-user-id',
-    };
-
+  const onSubmitTodo: FormSubmitHandler<CreateTodoSchema> = async (values) => {
     try {
-      const result = await addDoc(todosCollection, payload);
+      const todosCollection = getTodosCollection(firestore);
+      const result = await addDoc(todosCollection, values.data);
 
       showNotification({
         color: 'green',
@@ -50,7 +45,6 @@ export default function TodosCreate() {
       form.setValue('todo', '');
     }
   };
-  // #endregion
 
   useBeforeUnload(
     useCallback(
@@ -71,16 +65,17 @@ export default function TodosCreate() {
 
   return (
     <>
-      <form
+      <Form
         className="mb-3 flex w-full flex-col gap-3 duration-300 lg:flex-row"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onSubmit={form.handleSubmit(onSubmitTodo)}
+        control={form.control}
+        onSubmit={onSubmitTodo}
       >
-        <TextInput
+        <TextInputForm
+          control={form.control}
+          name="todo"
           w="100%"
           aria-label="Input todo"
           placeholder={LL.forms.todoPlaceholder()}
-          {...form.register('todo', { required: true, minLength: 3 })}
         />
 
         <Button
@@ -91,7 +86,7 @@ export default function TodosCreate() {
         >
           {LL.common.create()}
         </Button>
-      </form>
+      </Form>
 
       <Modal.Root centered opened={isModalOpen} onClose={close}>
         <Modal.Overlay />
