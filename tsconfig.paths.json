@@ -5,7 +5,6 @@
       "@app/*": ["./app/*"],
       "@assets/*": ["./assets/*"],
       "@i18n/*": ["./i18n/*"],
-      "@mocks/*": ["./mocks/*"],
       "@auth/*": ["./modules/auth/*"],
       "@home/*": ["./modules/home/*"],
       "@playground/*": ["./modules/playground/*"],

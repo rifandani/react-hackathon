@@ -1,6 +1,4 @@
 # testing
-/coverage
-/html
 stats.html
 
 # MSW browser mocking init file
