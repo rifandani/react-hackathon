@@ -1,5 +1,6 @@
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { StrictMode } from 'react';
+import AppDatesProvider from './providers/dates/DatesProvider';
 import AppErrorBoundary from './providers/error/ErrorBoundary';
 import AppFirebaseProvider from './providers/firebase/FirebaseProvider';
 import AppI18nProvider from './providers/i18n/I18nProvider';
@@ -16,21 +17,23 @@ export default function App() {
         <AppQueryProvider>
           <AppI18nProvider>
             <AppMantineProvider>
-              <AppToastProvider>
-                <AppFirebaseProvider>
-                  {/* router entry point */}
-                  <AppRouterProvider />
-                </AppFirebaseProvider>
+              <AppDatesProvider>
+                <AppToastProvider>
+                  <AppFirebaseProvider>
+                    {/* router entry point */}
+                    <AppRouterProvider />
+                  </AppFirebaseProvider>
 
-                {/* PWA */}
-                <ReloadPromptSW />
+                  {/* PWA */}
+                  <ReloadPromptSW />
 
-                {/* react query devtools */}
-                <ReactQueryDevtools
-                  initialIsOpen={false}
-                  buttonPosition="bottom-left"
-                />
-              </AppToastProvider>
+                  {/* react query devtools */}
+                  <ReactQueryDevtools
+                    initialIsOpen={false}
+                    buttonPosition="bottom-left"
+                  />
+                </AppToastProvider>
+              </AppDatesProvider>
             </AppMantineProvider>
           </AppI18nProvider>
         </AppQueryProvider>

@@ -32,9 +32,7 @@ export default function FileDropzoneForm<T extends FieldValues>({
     <Dropzone
       name={field.name}
       disabled={field.disabled}
-      onDrop={(files) => {
-        field.onChange(files);
-      }}
+      onDrop={field.onChange}
       {...props}
     >
       <Group justify="center" gap="xl" mih={220} className={classes.group}>

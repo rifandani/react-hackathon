@@ -10,9 +10,11 @@ import {
   Transition,
 } from '@mantine/core';
 import { shuffle } from '@rifandani/nxact-yutiriti';
+import useDatesConfig from '@shared/hooks/useDatesConfig/useDatesConfig.hook';
 import { useLocalesStorage } from '@shared/hooks/useLocalesStorage/useLocalesStorage.hook';
 import { useRafInterval } from '@shared/hooks/useRafInterval/useRafInterval.hook';
 import { todosPath } from '@todo/routes/todos.route';
+import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +23,7 @@ export default function HomeClock() {
   const { LL, locale, setLocale } = useI18nContext();
   const [, setLocalesStorage] = useLocalesStorage();
   const [parentRef] = useAutoAnimate();
+  const [, datesActions] = useDatesConfig();
 
   const [showClock, setShowClock] = useState(true);
   const [seconds, setSeconds] = useState(0);
@@ -59,10 +62,16 @@ export default function HomeClock() {
         setShowClock((prev) => !prev);
       },
       language: () => {
+        // set i18n locale
         const newLocale = locale === 'en' ? 'id' : 'en';
         setLocalesStorage(newLocale);
         loadLocale(newLocale);
         setLocale(newLocale);
+
+        // set dayjs locale globally
+        dayjs.locale(newLocale);
+        // set dates locale
+        datesActions.changeProps({ locale: newLocale });
       },
       start: () => {
         navigate(todosPath.root);

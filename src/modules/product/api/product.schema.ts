@@ -1,5 +1,6 @@
 import { IMAGE_MIME_TYPE } from '@mantine/dropzone';
 import { MAX_SIZE_FILE_PRODUCT } from '@product/constants/products.constant';
+import dayjs from 'dayjs';
 import { ArrayIndices } from 'type-fest';
 import { z } from 'zod';
 
@@ -9,8 +10,11 @@ export const productSchema = z.object({
   userId: z.string(),
   title: z.string(),
   stock: z.number(),
+  restockDate: z.number().nullable(), // milliseconds
   price: z.number(),
   imageUrl: z.string().url(),
+  createdAt: z.number(), // milliseconds
+  updatedAt: z.number(), // milliseconds
 });
 export const detailProductSchema = productSchema.pick({ id: true });
 export const createProductSchema = productSchema.omit({ id: true });
@@ -18,6 +22,12 @@ export const createProductFormSchema = z.object({
   userId: z.string(),
   title: z.string().min(3),
   stock: z.number().min(0),
+  restockDate: z
+    // .custom<Dayjs>()
+    // .refine((date) => date.isAfter(dayjs(new Date()), 'day'))
+    .date()
+    .min(dayjs().startOf('day').toDate())
+    .nullable(),
   price: z.number().min(0),
   files: z
     .array(z.custom<File>())

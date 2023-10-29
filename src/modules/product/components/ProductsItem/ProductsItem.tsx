@@ -1,9 +1,10 @@
 import { useI18nContext } from '@i18n/i18n-react';
-import { Button, Card, Divider, Image, Stack, Text } from '@mantine/core';
+import { Button, Card, Divider, Flex, Image, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ProductSchema } from '@product/api/product.schema';
 import { getProductDocument } from '@product/utils/products.util';
 import { toastError } from '@shared/utils/helper/helper.util';
+import dayjs from 'dayjs';
 import { deleteDoc } from 'firebase/firestore';
 import { FormEvent } from 'react';
 import { useFirestore, useUser } from 'reactfire';
@@ -64,11 +65,15 @@ export default function ProductsItem({ product }: Props) {
 
         <Card.Section className={classes.section}>
           <Stack>
-            <Text fz="xl" fw={700}>
-              {product.title}
-            </Text>
+            <Flex align="center" justify="space-between">
+              <Text fz="xl" fw={700}>
+                {product.title}
+              </Text>
 
-            <Divider />
+              <Text fz="sm" c="dimmed">
+                {product.stock} left
+              </Text>
+            </Flex>
 
             <Text fz="lg">
               {Intl.NumberFormat('id-ID', {
@@ -77,9 +82,12 @@ export default function ProductsItem({ product }: Props) {
               }).format(product.price)}
             </Text>
 
-            <Text fz="sm" c="dimmed">
-              {product.stock} left
-            </Text>
+            {product.restockDate && (
+              <Text fz="sm" c="dimmed">
+                Restock at:{' '}
+                {dayjs(product.restockDate).format('ddd, DD-MM-YYYY')}
+              </Text>
+            )}
 
             {product.userId === user.data?.uid && (
               <>

@@ -2,17 +2,17 @@
   "name": "images/products/bugatti.jpg",
   "bucket": "app-template-rifandani.appspot.com",
   "metageneration": 1,
-  "generation": 1698420223276,
+  "generation": 1698595951490,
   "contentType": "image/jpeg",
   "storageClass": "STANDARD",
   "contentDisposition": "inline",
   "downloadTokens": [
-    "2d1400c8-91cb-446d-ae7a-2d3154f4b1cf"
+    "ea67e6cd-3d37-4ffa-8090-877e4146abb2"
   ],
-  "etag": "2n3VxWLBdm6QUt1IqAKO+yUDbB8",
+  "etag": "M/25VTJSAZ7DYbW/4lDRsc0jcUw",
   "customMetadata": {},
-  "timeCreated": "2023-10-27T15:23:43.276Z",
-  "updated": "2023-10-27T15:23:43.276Z",
+  "timeCreated": "2023-10-29T16:12:31.490Z",
+  "updated": "2023-10-29T16:12:31.490Z",
   "size": 188008,
   "md5Hash": "VzmjNwD+ubFLQlyvmr6/mw==",
   "crc32c": "2923241872"

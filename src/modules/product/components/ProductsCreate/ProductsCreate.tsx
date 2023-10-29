@@ -8,6 +8,7 @@ import {
   createProductFormSchema,
 } from '@product/api/product.schema';
 import { getProductsCollection } from '@product/utils/products.util';
+import DatePickerInputForm from '@shared/components/smart/DatePickerInputForm/DatePickerInputForm';
 import FileDropzoneForm from '@shared/components/smart/FileDropzoneForm/FileDropzoneForm';
 import NumberInputForm from '@shared/components/smart/NumberInputForm/NumberInputForm';
 import TextInputForm from '@shared/components/smart/TextInputForm/TextInputForm';
@@ -31,6 +32,7 @@ export default function ProductsCreate() {
       userId: user.data?.uid ?? 'unknown-user-id',
       title: '',
       stock: 0,
+      restockDate: null,
       price: 0,
       files: [],
     },
@@ -68,7 +70,10 @@ export default function ProductsCreate() {
         userId: values.data.userId,
         title: values.data.title,
         stock: values.data.stock,
+        restockDate: values.data.restockDate?.valueOf() ?? null,
         price: values.data.price,
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
       } satisfies CreateProductSchema;
       const result = await addDoc(productsCollection, product);
 
@@ -92,6 +97,7 @@ export default function ProductsCreate() {
       <TextInputForm
         control={form.control}
         name="title"
+        withAsterisk
         w="100%"
         label="Title"
         placeholder="Product title..."
@@ -100,6 +106,7 @@ export default function ProductsCreate() {
       <NumberInputForm
         control={form.control}
         name="stock"
+        withAsterisk
         w="100%"
         thousandSeparator="."
         decimalSeparator=","
@@ -107,9 +114,20 @@ export default function ProductsCreate() {
         placeholder="Product stock..."
       />
 
+      <DatePickerInputForm
+        control={form.control}
+        name="restockDate"
+        clearable
+        minDate={new Date()}
+        w="100%"
+        label="Restock date (if any)"
+        placeholder="Pick date"
+      />
+
       <NumberInputForm
         control={form.control}
         name="price"
+        withAsterisk
         w="100%"
         prefix="Rp"
         thousandSeparator="."
