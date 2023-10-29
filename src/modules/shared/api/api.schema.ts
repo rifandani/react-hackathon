@@ -1,6 +1,9 @@
+/**
+ * This is for dummyjson API
+ */
+
 import { z } from 'zod';
 
-// #region SCHEMAS
 export const errorApiResponseSchema = z.object({
   message: z.string(),
 });
@@ -16,7 +19,6 @@ export const resourceListSchema = z.object({
   skip: z.number(),
   limit: z.number(),
 });
-// #endregion
 
 export type ErrorApiResponseSchema = z.infer<typeof errorApiResponseSchema>;
 export type ResourceParamsSchema = z.infer<typeof resourceParamsSchema>;

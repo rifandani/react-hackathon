@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const envSchema = z.object({
-  NEXT_PUBLIC_APP_URL: z.string().url(),
-  API_BASE_URL: z.string().url(),
+  VITE_APP_TITLE: z.string(),
+  VITE_API_BASE_URL: z.string().url(),
 });
 
 export type EnvSchema = z.infer<typeof envSchema>;

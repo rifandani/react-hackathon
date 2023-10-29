@@ -5,11 +5,9 @@
       "@app/*": ["./app/*"],
       "@assets/*": ["./assets/*"],
       "@i18n/*": ["./i18n/*"],
+      "@shared/*": ["./modules/shared/*"],
       "@auth/*": ["./modules/auth/*"],
       "@home/*": ["./modules/home/*"],
-      "@playground/*": ["./modules/playground/*"],
-      "@setting/*": ["./modules/setting/*"],
-      "@shared/*": ["./modules/shared/*"],
       "@todo/*": ["./modules/todo/*"],
       "@product/*": ["./modules/product/*"]
     }

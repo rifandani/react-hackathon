@@ -1,4 +1,6 @@
-# Features
+# React Template for Hackathon
+
+## Features
 
 React Hackathon Template built with:
 
@@ -24,18 +26,11 @@ React Hackathon Template built with:
 Rename `.env.development.example` to `.env.development`.
 Rename `.env.production.example` to `.env.production`.
 
-We use firebase free services to accelerate the short development and integrate with firebase CLI, so make sure to install `firebase-tools` as global dependencies.
-
-```bash
-# install firebase CLI
-$ npm i -g firebase-tools
-```
-
-We also running firebase emulators suite UI in development. Currently we only use "firestore", "storage", "database", "auth", and not "functions", "pubsub" and "eventarc".
+We use firebase free services to accelerate the short development. We also running firebase emulators suite UI in development. Currently we only use free services such as: "firestore", "storage", "database", and "auth". Paid services such as: "functions", "pubsub" and "eventarc" are not included.
 
 When we start firebase emulator, it will try to import the seed data from `./firebase-data` folder. And when we stop the server, it will try to update & export your latest data to `./firebase-data` folder.
 
-To start, first try to install and then run the app.
+To start, install and then run the app.
 
 ```bash
 # install deps
@@ -46,7 +41,6 @@ $ pnpm install
 
 # Runs the app with PWA + sync with i18n changes
 $ pnpm on:dev
-
 # Runs the firebase emulator in another terminal
 $ pnpm emu:start
 ```
