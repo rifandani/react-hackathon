@@ -14,6 +14,7 @@ import {
   Menu,
   Text,
   useMantineColorScheme,
+  useMantineTheme,
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { productsPath } from '@product/routes/products.route';
@@ -26,6 +27,7 @@ import classes from './Navbar.module.css';
 export default function Navbar() {
   const { LL } = useI18nContext();
   const navigate = useNavigate();
+  const theme = useMantineTheme();
   const colorScheme = useMantineColorScheme();
   const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] =
     useDisclosure(false);
@@ -34,11 +36,11 @@ export default function Navbar() {
 
   // #region HANDLERS
   const onClickLogout = async () => {
-    await auth.signOut(); // clear user store
-    navigate(authPath.login); // back to login page
+    await auth.signOut();
+    navigate(authPath.login);
   };
-  const onClickChangeTheme = (theme: MantineColorScheme) => () => {
-    colorScheme.setColorScheme(theme);
+  const onClickChangeTheme = (_colorScheme: MantineColorScheme) => () => {
+    colorScheme.setColorScheme(_colorScheme);
   };
   // #endregion
 
@@ -141,15 +143,87 @@ export default function Navbar() {
                 </Menu.Target>
 
                 <Menu.Dropdown>
-                  <Menu.Label>User</Menu.Label>
+                  <Menu.Item
+                    rightSection={<Icon icon="lucide:chevron-right" />}
+                  >
+                    <Group>
+                      <Avatar
+                        radius="xl"
+                        src={data.photoURL}
+                        alt={data.displayName ?? data.email ?? 'Unknown'}
+                      >
+                        {(data.displayName ?? data.email ?? 'Unknown').slice(
+                          0,
+                          2,
+                        )}
+                      </Avatar>
+
+                      <div>
+                        <Text fw={500}>
+                          {data.displayName ?? data.email ?? 'Unknown'}
+                        </Text>
+                        <Text size="xs" c="dimmed">
+                          {data.email ?? 'Unknown'}
+                        </Text>
+                      </div>
+                    </Group>
+                  </Menu.Item>
+
+                  <Menu.Divider />
+
                   <Menu.Item
                     component="button"
-                    color="red"
+                    leftSection={
+                      <Icon icon="lucide:heart" color={theme.colors.red[6]} />
+                    }
+                  >
+                    Liked products
+                  </Menu.Item>
+                  <Menu.Item
+                    component="button"
+                    leftSection={
+                      <Icon icon="lucide:star" color={theme.colors.yellow[6]} />
+                    }
+                  >
+                    Saved products
+                  </Menu.Item>
+                  <Menu.Item
+                    component="button"
+                    leftSection={
+                      <Icon
+                        icon="lucide:messages-square"
+                        color={theme.colors.blue[6]}
+                      />
+                    }
+                  >
+                    Your comments
+                  </Menu.Item>
+
+                  <Menu.Label>Settings</Menu.Label>
+                  <Menu.Item
+                    component="button"
+                    leftSection={<Icon icon="lucide:settings" />}
+                  >
+                    Account settings
+                  </Menu.Item>
+                  <Menu.Item
+                    component="button"
                     leftSection={<Icon icon="lucide:log-out" />}
                     // eslint-disable-next-line @typescript-eslint/no-misused-promises
                     onClick={onClickLogout}
                   >
                     Logout
+                  </Menu.Item>
+
+                  <Menu.Divider />
+
+                  <Menu.Label>Danger zone</Menu.Label>
+                  <Menu.Item
+                    component="button"
+                    color="red"
+                    leftSection={<Icon icon="lucide:trash" />}
+                  >
+                    Delete account
                   </Menu.Item>
                 </Menu.Dropdown>
               </Menu>

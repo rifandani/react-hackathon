@@ -1,7 +1,5 @@
 import { authPath } from '@auth/routes/auth.route';
 import { homePath } from '@home/routes/home.route';
-import { useI18nContext } from '@i18n/i18n-react';
-import { showNotification } from '@mantine/notifications';
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from 'reactfire';
@@ -18,7 +16,6 @@ import { useUser } from 'reactfire';
  * ```
  */
 export default function useCheckAuthFirebase() {
-  const { LL } = useI18nContext();
   const navigate = useNavigate();
   const location = useLocation();
   const { status, data: user } = useUser();
@@ -37,21 +34,11 @@ export default function useCheckAuthFirebase() {
 
     if (!user) {
       navigate(authPath.login, { replace: true });
-      showNotification({
-        title: 'Auth Error',
-        message: LL.common.unauthorized(),
-        color: 'red',
-      });
       return;
     }
 
     if (isLoginPath || isRegisterPath) {
       navigate(homePath.root);
-      showNotification({
-        title: 'Auth Info',
-        message: LL.common.authorized(),
-        color: 'blue',
-      });
     }
 
     // don't listen to eslint

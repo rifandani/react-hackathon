@@ -1,6 +1,6 @@
-import { LoginSchema } from '../api/auth.schema';
+import { LoginFormSchema } from '../api/auth.schema';
 
-export const loginFormDefaultValues: LoginSchema = {
+export const loginFormDefaultValues: LoginFormSchema = {
   email: '',
   password: '',
 };

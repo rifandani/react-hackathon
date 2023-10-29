@@ -55,6 +55,7 @@ export default function FirebaseServiceProvider({
     });
   }
 
+  // persist auth user data to localStorage
   useMount(() => {
     authInstance.setPersistence(browserLocalPersistence).catch((err) => {
       toastError(err);
