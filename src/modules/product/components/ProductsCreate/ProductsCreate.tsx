@@ -7,14 +7,15 @@ import {
   CreateProductSchema,
   createProductFormSchema,
 } from '@product/api/product.schema';
-import { getProductsCollection } from '@product/utils/products.util';
+import { getProductDocument } from '@product/utils/products.util';
 import DatePickerInputForm from '@shared/components/smart/DatePickerInputForm/DatePickerInputForm';
 import FileDropzoneForm from '@shared/components/smart/FileDropzoneForm/FileDropzoneForm';
 import NumberInputForm from '@shared/components/smart/NumberInputForm/NumberInputForm';
 import TextInputForm from '@shared/components/smart/TextInputForm/TextInputForm';
 import { toastError } from '@shared/utils/helper/helper.util';
-import { addDoc } from 'firebase/firestore';
+import { getDoc, setDoc } from 'firebase/firestore';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
+import { nanoid } from 'nanoid';
 import { Form, FormSubmitHandler, useForm } from 'react-hook-form';
 import { useFirestore, useStorage, useUser } from 'reactfire';
 
@@ -23,7 +24,6 @@ export default function ProductsCreate() {
   const user = useUser();
   const storage = useStorage();
   const firestore = useFirestore();
-  const productsCollection = getProductsCollection(firestore);
 
   const form = useForm<CreateProductFormSchema>({
     mode: 'onChange',
@@ -57,16 +57,9 @@ export default function ProductsCreate() {
     values,
   ) => {
     try {
-      // save product image to firestorage
-      const image = values.data.files[0];
-      const filePath = `images/products/${image.name}`;
-      const imageRef = ref(storage, filePath);
-      await uploadBytesResumable(imageRef, image);
-      const imageUrl = await getDownloadURL(imageRef);
-
-      // save product data to firestore
-      const product = {
-        imageUrl,
+      const productId = nanoid();
+      const product: CreateProductSchema = {
+        imageUrls: [],
         userId: values.data.userId,
         title: values.data.title,
         stock: values.data.stock,
@@ -74,13 +67,26 @@ export default function ProductsCreate() {
         price: values.data.price,
         createdAt: Date.now(),
         updatedAt: Date.now(),
-      } satisfies CreateProductSchema;
-      const result = await addDoc(productsCollection, product);
+      };
+
+      // save product image to firestorage
+      product.imageUrls = await Promise.all(
+        values.data.files.map(async (image) => {
+          const filePath = `images/products/${productId}/${image.name}`;
+          const imageRef = ref(storage, filePath);
+          await uploadBytesResumable(imageRef, image);
+          return getDownloadURL(imageRef);
+        }),
+      );
+
+      // save product data to firestore
+      const productDoc = await getDoc(getProductDocument(firestore, productId));
+      await setDoc(productDoc.ref, product);
 
       showNotification({
         color: 'green',
         title: 'Mutation Success',
-        message: `Product created with id: ${result.id}`,
+        message: `Product created with id: ${productId}`,
       });
     } catch (err) {
       toastError(err);
