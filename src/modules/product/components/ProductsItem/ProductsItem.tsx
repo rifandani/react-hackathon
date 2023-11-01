@@ -1,13 +1,16 @@
 import { useI18nContext } from '@i18n/i18n-react';
+import { Carousel } from '@mantine/carousel';
 import { Button, Card, Divider, Flex, Image, Stack, Text } from '@mantine/core';
 import { showNotification } from '@mantine/notifications';
 import { ProductSchema } from '@product/api/product.schema';
 import { getProductDocument } from '@product/utils/products.util';
 import { toastError } from '@shared/utils/helper/helper.util';
 import dayjs from 'dayjs';
+import Autoplay from 'embla-carousel-autoplay';
 import { deleteDoc } from 'firebase/firestore';
-import { FormEvent } from 'react';
-import { useFirestore, useUser } from 'reactfire';
+import { deleteObject, listAll, ref } from 'firebase/storage';
+import { FormEvent, useRef } from 'react';
+import { useFirestore, useStorage, useUser } from 'reactfire';
 import classes from './ProductsItem.module.css';
 
 interface Props {
@@ -18,6 +21,8 @@ export default function ProductsItem({ product }: Props) {
   const user = useUser();
   const { LL } = useI18nContext();
   const firestore = useFirestore();
+  const storage = useStorage();
+  const autoplay = useRef(Autoplay({ delay: 2000 }));
 
   // #region HANDLERS
   const onSubmitDeleteProduct =
@@ -28,16 +33,24 @@ export default function ProductsItem({ product }: Props) {
       if (_product.userId !== user.data?.uid) return;
 
       try {
-        // reference to the product document in products collection
-        const productDoc = getProductDocument(firestore, _product.id);
-
         // delete product document
+        const productDoc = getProductDocument(firestore, _product.id);
         await deleteDoc(productDoc);
+
+        // delete all images in storage
+        const productImagesPath = `images/products/${_product.id}`;
+        const imagesRef = ref(storage, productImagesPath);
+        const imageList = await listAll(imagesRef);
+        await Promise.all(
+          imageList.items.map(async (imageRef) => {
+            await deleteObject(imageRef);
+          }),
+        );
 
         showNotification({
           color: 'green',
           title: 'Mutation Success',
-          message: `Product with id: ${_product.id} deleted`,
+          message: `Product deleted with id: ${_product.id}`,
         });
       } catch (err) {
         toastError(err);
@@ -56,11 +69,26 @@ export default function ProductsItem({ product }: Props) {
 
       <Card withBorder radius="md" className={classes.card}>
         <Card.Section className={classes.imageSection}>
-          <Image
-            src={product.imageUrl}
-            alt={product.title}
-            className="h-40 w-full object-cover"
-          />
+          <Carousel
+            withIndicators
+            classNames={{
+              container: classes.container,
+              indicator: classes.indicator,
+            }}
+            plugins={[autoplay.current]}
+            onMouseEnter={autoplay.current.stop}
+            onMouseLeave={autoplay.current.reset}
+          >
+            {product.imageUrls.map((imageUrl) => (
+              <Carousel.Slide key={imageUrl}>
+                <Image
+                  src={imageUrl}
+                  alt={product.title}
+                  className="h-full w-full object-contain"
+                />
+              </Carousel.Slide>
+            ))}
+          </Carousel>
         </Card.Section>
 
         <Card.Section className={classes.section}>

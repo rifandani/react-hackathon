@@ -12,7 +12,7 @@ export const productSchema = z.object({
   stock: z.number(),
   restockDate: z.number().nullable(), // milliseconds
   price: z.number(),
-  imageUrl: z.string().url(),
+  imageUrls: z.array(z.string().url()),
   createdAt: z.number(), // milliseconds
   updatedAt: z.number(), // milliseconds
 });
@@ -31,7 +31,6 @@ export const createProductFormSchema = z.object({
   price: z.number().min(0),
   files: z
     .array(z.custom<File>())
-    .refine((files) => files.length === 1, 'You should choose only 1 file')
     .refine(
       (files) => files.every((file) => file instanceof File),
       'Expected a file',

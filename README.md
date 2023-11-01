@@ -12,7 +12,7 @@ React Hackathon Template built with:
 - `@iconify-icon/react` -> SVG icon on demand
 - `react-hook-form` -> form management
 - `zustand` -> performant global state
-- `@mantine/core` + `@mantine/notifications` + `@mantine/dates` + `@mantine/spotlight` -> adaptive, accessible and robust styled UI components
+- `@mantine/core` + `@mantine/notifications` + `@mantine/dates` + `@mantine/spotlight` + `@mantine/carousel` -> adaptive, accessible and robust styled UI components for rapid prototyping
 - `typesafe-i18n` -> i18n, supports for "en" & "id" locales
 - `type-fest` -> collection of useful type helpers
 - `@mantine/hooks` -> collection of useful react custom hooks
